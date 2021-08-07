@@ -14,8 +14,8 @@ from linebot.models import (
 app = Flask(__name__)
 
 #環境変数取得
-# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["tOliNdhJrc765XxCGItThMYGSistgj6GOnqdj3jUu1AcZi9Zz+vVTkOPX5kRnm/KcWfxDupseVXoDUkNlLS5PQsSW9v4hcZWSaEPTJsX4Hm7Rp2Y6WuG7yJe8X/fn2x7XOtlQw3CEsXjZy6unp50BgdB04t89/1O/w1cDnyilFU="]
-# YOUR_CHANNEL_SECRET = os.environ["8ea6154ec5c4507837f28fc5b194c2c7"]
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU="]
+# YOUR_CHANNEL_SECRET = os.environ["e157aafd232b4650558937ce7250f4d9"]
 
 line_bot_api = LineBotApi("miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU=")
 handler = WebhookHandler("e157aafd232b4650558937ce7250f4d9")
@@ -55,7 +55,7 @@ def callback():
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text)) #ここでオウム返しのメッセージを返します。
+        TextSendMessage(text="Hello World")) #ここでオウム返しのメッセージを返します。
  
 # ポート番号の設定
 if __name__ == "__main__":
