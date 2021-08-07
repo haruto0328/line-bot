@@ -10,6 +10,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+from linebot.models import TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction
 
 app = Flask(__name__)
 
@@ -53,9 +54,27 @@ def callback():
  
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    for event in events:
+        date_picker = TemplateSendMessage(
+            alt_text='予定日を設定',
+            template=ButtonsTemplate(
+                text='予定日を設定',
+                title='YYYY-MM-dd',
+                actions=[
+                    DatetimePickerTemplateAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='date',
+                        initial='2017-04-01',
+                        min='2017-04-01',
+                        max='2099-12-31'
+                    )
+                ]
+            )
+        )
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="Hello World")) #ここでオウム返しのメッセージを返します。
+        TextSendMessage(text=event.message.text)) #ここでメッセージを返します。
  
 # ポート番号の設定
 if __name__ == "__main__":
