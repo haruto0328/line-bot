@@ -8,9 +8,9 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction
 )
-from linebot.models import TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction
+
 
 app = Flask(__name__)
 
@@ -74,6 +74,7 @@ def handle_message(event):
         )
     line_bot_api.reply_message(
         event.reply_token,
+        date_picker,
         TextSendMessage(text=event.message.text)) #ここでメッセージを返します。
  
 # ポート番号の設定
