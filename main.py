@@ -6,7 +6,7 @@ line_bot_api = LineBotApi('miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfc
 parser = WebhookParser('e157aafd232b4650558937ce7250f4d9')
 
 
-def webhook(request):
+def webhook(events):
     # Signatureチェック等
 
     for event in events:
