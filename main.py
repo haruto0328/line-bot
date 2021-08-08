@@ -1,3 +1,5 @@
+# line_bot_api.push_message(profile.user_id, messages=container_obj)
+
 from flask import Flask, request, abort
 import os
 
@@ -8,17 +10,17 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, FlexSendMessage
 )
 
 app = Flask(__name__)
 
 #環境変数取得
-# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU="]
-# YOUR_CHANNEL_SECRET = os.environ["e157aafd232b4650558937ce7250f4d9"]
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["tOliNdhJrc765XxCGItThMYGSistgj6GOnqdj3jUu1AcZi9Zz+vVTkOPX5kRnm/KcWfxDupseVXoDUkNlLS5PQsSW9v4hcZWSaEPTJsX4Hm7Rp2Y6WuG7yJe8X/fn2x7XOtlQw3CEsXjZy6unp50BgdB04t89/1O/w1cDnyilFU="]
+# YOUR_CHANNEL_SECRET = os.environ["8ea6154ec5c4507837f28fc5b194c2c7"]
 
-line_bot_api = LineBotApi("miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("e157aafd232b4650558937ce7250f4d9")
+line_bot_api = LineBotApi("tOliNdhJrc765XxCGItThMYGSistgj6GOnqdj3jUu1AcZi9Zz+vVTkOPX5kRnm/KcWfxDupseVXoDUkNlLS5PQsSW9v4hcZWSaEPTJsX4Hm7Rp2Y6WuG7yJe8X/fn2x7XOtlQw3CEsXjZy6unp50BgdB04t89/1O/w1cDnyilFU=")
+handler = WebhookHandler("8ea6154ec5c4507837f28fc5b194c2c7")
 
 ## 1 ##
 #Webhookからのリクエストをチェックします。
@@ -50,13 +52,24 @@ def callback():
 #def以下の関数を実行します。
 #reply_messageの第一引数のevent.reply_tokenは、イベントの応答に用いるトークンです。 
 #第二引数には、linebot.modelsに定義されている返信用のTextSendMessageオブジェクトを渡しています。
- 
+
+payload = {
+    "type":"datetimepicker",
+    "label":"Select date",
+    "data":"storeId=12345",
+    "mode":"datetime",
+    "initial":"2017-12-25t00:00",
+    "max":"2018-01-24t23:59",
+    "min":"2017-12-25t00:00"
+}
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text)) #ここでオウム返しのメッセージを返します。
- 
+        # TextSendMessage(text=event.message.text)) #ここでオウム返しのメッセージを返します.
+        FlexSendMessage.new_from_json_dict(payload))
+
 # ポート番号の設定
 if __name__ == "__main__":
 #    app.run()
