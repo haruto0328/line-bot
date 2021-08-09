@@ -52,18 +52,18 @@ def callback():
 #第二引数には、linebot.modelsに定義されている返信用のTextSendMessageオブジェクトを渡しています。
 
 date_picker = TemplateSendMessage(
-            alt_text='予定日を設定',
+            alt_text='次回活動日時を設定してください',
             template=ButtonsTemplate(
-                text='予定日を設定',
-                title='YYYY-MM-dd',
+                text='次回活動日時を設定してください。',
+                title='次回活動日時を設定',
                 actions=[
                     DatetimePickerTemplateAction(
                         label='設定',
                         data='action=buy&itemid=1',
-                        mode='date',
-                        initial='2017-04-01',
-                        min='2017-04-01',
-                        max='2099-12-31'
+                        mode='datetime',
+                        initial='2021-04-01 00:00',
+                        min='2021-04-01 00:00',
+                        max='2099-12-31 00:00'
                     )
                 ]
             )
@@ -74,7 +74,7 @@ date_picker = TemplateSendMessage(
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        date_picker) #ここでオウム返しのメッセージを返します。
+        date_picker) #ここで予定日設定用のメッセージを返します。
 
 # ポート番号の設定
 if __name__ == "__main__":
