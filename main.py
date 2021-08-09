@@ -82,7 +82,7 @@ def handle_message(event):
 def default(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.postback.params['datetime'] + 'に活動予定日を設定しました。'))
+        TextSendMessage(text=event.postback.params['date'] +':'+ event.postback.params['time'] + 'に活動予定日を設定しました。'))
 
 
 
