@@ -61,9 +61,9 @@ date_picker = TemplateSendMessage(
                         label='設定',
                         data='action=buy&itemid=1',
                         mode='datetime',
-                        initial='2021-04-01 00:00',
-                        min='2021-04-01 00:00',
-                        max='2099-12-31 00:00'
+                        initial='2021-04-01t00:00',
+                        min='2021-04-01t00:00',
+                        max='2099-12-31t00:00'
                     )
                 ]
             )
