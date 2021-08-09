@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction, PostbackEvent
 )
 
 app = Flask(__name__)
@@ -74,12 +74,15 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         date_picker) #ここで予定日設定用のメッセージを返します。
+    if isinstance(event, PostbackEvent):
+        time = event.postback.params['datetime']
+        return time
 
 @handler.default()
 def default(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='活動予定日時を設定しました。'))
+        TextSendMessage(text=handle_message(event)))
 
 
 
