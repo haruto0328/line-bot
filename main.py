@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import os
+import sqlite3
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -74,9 +75,6 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         date_picker) #ここで予定日設定用のメッセージを返します。
-    # if isinstance(event, PostbackEvent):
-    #     time = event.postback.params['datetime']
-    #     return time
 
 @handler.default()
 def default(event):
@@ -84,6 +82,11 @@ def default(event):
         event.reply_token,
         TextSendMessage(text=event.postback.params['datetime'] + 'に活動予定日を設定しました。'))
 
+    # データベースに次回活動予定日データを挿入
+    conn = sqlite3.connect('iungoback.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO users VALUES ("+event.postback.params['datetime']+")")
+    conn.close()
 
 
 # ポート番号の設定
