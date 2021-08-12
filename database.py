@@ -24,6 +24,7 @@ for row in c.execute('SELECT datetime FROM dates where rowid = last_insert_rowid
     today = str(datetime.date.today())
     if(plan == today):
         # print('今日が活動日です。')
+        @handler.default()
         def default(event):
             line_bot_api.reply_message(
             event.reply_token,
