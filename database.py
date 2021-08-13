@@ -1,3 +1,4 @@
+from main import default
 import sqlite3
 from datetime import datetime
 import datetime
@@ -22,10 +23,10 @@ for row in c.execute('SELECT datetime FROM dates where rowid = last_insert_rowid
     plan = re.search('\d+-\d+-\d+', str(row)).group()
     today = str(datetime.date.today())
     if(plan == today):
-        @handler.default_2()
-        def default_2(event):
+        @handler.default()
+        def default(event):
             line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage('今日の時から、活動があります。忘れずに参加してください！！'))
+                event.reply_token,
+                TextSendMessage('今日の時から、活動があります。忘れずに参加してください！！'))
 
 conn.close()
