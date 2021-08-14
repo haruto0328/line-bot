@@ -1,6 +1,6 @@
 from flask import Flask, request, abort
 import os
-import sqlite3
+import psycopg2
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -83,9 +83,13 @@ def default(event):
         TextSendMessage(text=event.postback.params['datetime'] + 'に活動予定日を設定しました。'))
 
     # データベースに次回活動予定日データを挿入
-    conn = sqlite3.connect('iungoback.db')
+    conn = psycopg2.connect("host=" + "ec2-54-197-100-79.compute-1.amazonaws.com" +
+                            " port=" + "5432" +
+                            " dbname=" + "d469he2n9rkhus" +
+                            " user=" + "epgqpirhombheu" +
+                            " password=" + "24d6a2537ae752fc37baa19b3463e8e09c13732e60b26966afec049323e57c5e")
     c = conn.cursor()
-    c.execute("INSERT INTO users VALUES ("+event.postback.params['datetime']+")")
+    c.execute("INSERT INTO datetimes VALUES ("+event.postback.params['datetime']+")")
     conn.close()
 
 
