@@ -89,7 +89,7 @@ def default(event):
                             " user=" + "epgqpirhombheu" +
                             " password=" + "24d6a2537ae752fc37baa19b3463e8e09c13732e60b26966afec049323e57c5e")
     c = conn.cursor()
-    c.execute("INSERT INTO datetimes (dates) VALUES ("+event.postback.params['datetime']+");")
+    c.execute("INSERT INTO datetimes (dates) VALUES ("+str(event.postback.params['datetime'])+");")
     conn.close()
 
 
