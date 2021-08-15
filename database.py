@@ -23,7 +23,7 @@ c = conn.cursor()
 
 # c.execute("INSERT INTO dates VALUES ('2021-08-12T09:00')")
 
-row = c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1;')
+row = c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1')
 plan = re.search('\d+-\d+-\d+', str(row)).group()
 today = str(datetime.date.today())
 if(plan == today):
