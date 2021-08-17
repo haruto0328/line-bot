@@ -31,6 +31,6 @@ for row in c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1;'):
         def default():
             # line_bot_api.reply_message(
             #     event.reply_token,
-                TextSendMessage(text='今日の時から、活動があります。忘れずに参加してください！！'))
+                TextSendMessage(text='今日の時から、活動があります。忘れずに参加してください！！')
 
 conn.close()
