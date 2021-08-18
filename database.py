@@ -23,11 +23,11 @@ c = conn.cursor()
 
 # c.execute("INSERT INTO dates VALUES ('2021-08-12T09:00')")
 
-for row in c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1;'):
+for row in c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1'):
     plan = re.search('\d+-\d+-\d+', str(row)).group()
     today = str(datetime.date.today())
     if(plan == today):
-        line_bot_api.push_message('sh20010328', messages=TextSendMessage(text='今日の時から、活動があります。忘れずに参加してください！！'))
+        line_bot_api.push_message('U888983a63d766bb9a7e716ca8ca7f8b9', messages=TextSendMessage(text='今日の時から、活動があります。忘れずに参加してください！！'))
         # @handler.default()
         # def default():
         #     # line_bot_api.reply_message(
