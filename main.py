@@ -58,9 +58,11 @@ date_picker = TemplateSendMessage(
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        date_picker) #ここで予定日設定用のメッセージを返します。
+    text = event.message.text
+    if text in ['次回の活動予定を設定']:
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker) #ここで予定日設定用のメッセージを返します。
 
 @handler.default()
 def default(event):
