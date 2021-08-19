@@ -29,6 +29,6 @@ for row in c:
     now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
     today = re.search('\d+-\d+-\d+', str(now)).group()
     if(plan == today):
-        line_bot_api.push_message('U888983a63d766bb9a7e716ca8ca7f8b9', messages=TextSendMessage(text='今日の'+plan_time+'から、活動があります。忘れずに参加してください！！'))
+        line_bot_api.push_message('C3f419c10ffe995b0cc76e8cffbd14e09', messages=TextSendMessage(text='今日の'+plan_time+'から、活動があります。忘れずに参加してください！！'))
 
 conn.close()
