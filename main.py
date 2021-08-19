@@ -14,10 +14,6 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-#環境変数取得
-# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["tOliNdhJrc765XxCGItThMYGSistgj6GOnqdj3jUu1AcZi9Zz+vVTkOPX5kRnm/KcWfxDupseVXoDUkNlLS5PQsSW9v4hcZWSaEPTJsX4Hm7Rp2Y6WuG7yJe8X/fn2x7XOtlQw3CEsXjZy6unp50BgdB04t89/1O/w1cDnyilFU="]
-# YOUR_CHANNEL_SECRET = os.environ["8ea6154ec5c4507837f28fc5b194c2c7"]
-
 line_bot_api = LineBotApi("miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU=")
 handler = WebhookHandler("e157aafd232b4650558937ce7250f4d9")
 
@@ -41,16 +37,6 @@ def callback():
         abort(400)
 # handleの処理を終えればOK
     return 'OK'
- 
-## 2 ##
-###############################################
-#LINEのメッセージの取得と返信内容の設定(オウム返し)
-###############################################
- 
-#LINEでMessageEvent（普通のメッセージを送信された場合）が起こった場合に、
-#def以下の関数を実行します。
-#reply_messageの第一引数のevent.reply_tokenは、イベントの応答に用いるトークンです。 
-#第二引数には、linebot.modelsに定義されている返信用のTextSendMessageオブジェクトを渡しています。
 
 date_picker = TemplateSendMessage(
             alt_text='次回活動日時を設定してください',

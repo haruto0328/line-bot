@@ -2,6 +2,7 @@ from main import default
 import psycopg2
 from datetime import datetime
 import datetime
+import pytz
 import re
 
 from linebot import (
@@ -19,19 +20,15 @@ conn = psycopg2.connect("host=" + "ec2-54-197-100-79.compute-1.amazonaws.com" +
                             " dbname=" + "d469he2n9rkhus" +
                             " user=" + "epgqpirhombheu" +
                             " password=" + "24d6a2537ae752fc37baa19b3463e8e09c13732e60b26966afec049323e57c5e")
-c = conn.cursor()
 
+c = conn.cursor()
 c.execute('SELECT dates FROM datetimes ORDER BY id DESC LIMIT 1')
 for row in c:
     plan = re.search('\d+-\d+-\d+', str(row)).group()
     plan_time = re.search('\d+:\d+', str(row)).group()
-    today = str(datetime.date.today())
+    now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+    today = re.search('\d+-\d+-\d+', str(now)).group()
     if(plan == today):
-        line_bot_api.push_message('U888983a63d766bb9a7e716ca8ca7f8b9', messages=TextSendMessage(text='今日の'+plan_time+'時から、活動があります。忘れずに参加してください！！'))
-        # @handler.default()
-        # def default():
-        #     # line_bot_api.reply_message(
-        #     #     event.reply_token,
-        #         TextSendMessage(text='今日の時から、活動があります。忘れずに参加してください！！')
+        line_bot_api.push_message('U888983a63d766bb9a7e716ca8ca7f8b9', messages=TextSendMessage(text='今日の'+plan_time+'から、活動があります。忘れずに参加してください！！'))
 
 conn.close()
