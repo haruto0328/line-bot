@@ -1,6 +1,9 @@
 from flask import Flask, request, abort
 import os
 import psycopg2
+import datetime
+import pytz
+import re
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -38,6 +41,10 @@ def callback():
 # handleの処理を終えればOK
     return 'OK'
 
+
+now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+today = re.search('\d+-\d+-\d+', str(now)).group()
+
 date_picker = TemplateSendMessage(
             alt_text='次回活動日時を設定してください',
             template=ButtonsTemplate(
@@ -48,9 +55,9 @@ date_picker = TemplateSendMessage(
                         label='設定',
                         data='action=buy&itemid=1',
                         mode='datetime',
-                        initial='2021-04-01t00:00',
+                        initial=today+'t09:00',
                         min='2021-04-01t00:00',
-                        max='2099-12-31t00:00'
+                        max='2099-12-31t23:59'
                     )
                 ]
             )
