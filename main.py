@@ -17,8 +17,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi("miP/OnH4rBYGo5qLlP7pyxAXFdss80DswDHNXqdafSxJ0nQZlKyfcwpHsyhN5FPYlk5Shc6WRo8aGBzIpdzknC2KueOtNbB4SIslsIKZdaprgn0Tf8qxxXBDEt9WV4h/lF/7tN0q1jpcQ7VcesfqHQdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("e157aafd232b4650558937ce7250f4d9")
+line_bot_api = LineBotApi("MessagingAPIのチャネルアクセストークン")
+handler = WebhookHandler("MessagingAPIのチャネルシークレット")
 
 ## 1 ##
 #Webhookからのリクエストをチェックします。
@@ -78,11 +78,11 @@ def default(event):
         TextSendMessage(text=event.postback.params['datetime'] + 'に活動予定日を設定しました。'))
 
     # データベースに次回活動予定日データを挿入
-    conn = psycopg2.connect("host=" + "ec2-54-197-100-79.compute-1.amazonaws.com" +
-                            " port=" + "5432" +
-                            " dbname=" + "d469he2n9rkhus" +
-                            " user=" + "epgqpirhombheu" +
-                            " password=" + "24d6a2537ae752fc37baa19b3463e8e09c13732e60b26966afec049323e57c5e")
+    conn = psycopg2.connect("host=" + "hogehoge" +
+                            " port=" + "hogehoge" +
+                            " dbname=" + "hogehoge" +
+                            " user=" + "hogehoge" +
+                            " password=" + "hogehoge")
     c = conn.cursor()
     c.execute("INSERT INTO datetimes (dates) VALUES ('"+event.postback.params['datetime']+"');")
     conn.commit()
